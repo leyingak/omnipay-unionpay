@@ -72,7 +72,7 @@ class ExpressPurchaseRequest extends AbstractRequest
 
     private function validateData()
     {
-        $this->validate('returnUrl', 'notifyUrl', 'merId', 'orderId', 'txnTime', 'orderDesc', 'txnAmt');
+        $this->validate(/*'returnUrl', */'notifyUrl', 'merId', 'orderId', 'txnTime', 'orderDesc', 'txnAmt');
     }
 
 
