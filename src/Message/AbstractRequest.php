@@ -408,8 +408,11 @@ abstract class AbstractRequest extends BaseAbstractRequest
             'Content-Type' => 'application/x-www-form-urlencoded'
         ];
 
-        $response = $this->httpClient->request('POST', $url, $headers, $body)->getBody();
-
+        // 新版omnipay-common中无post()方法，会导致单元测试失败,除非omnipay/common: v3.0-alpha.1
+        // 但为不影响微信支付在支付项目中不升级omnipay
+        //$response = $this->httpClient->request('POST', $url, $headers, $body)->getBody();
+        //$response = $this->httpClient->createRequest('POST', $url, $headers, $body)->send()->getBody();
+        $response = $this->httpClient->post($url, $headers, $body)->getBody();
         $payload  = StringUtil::parseFuckStr($response);
 
         return $payload;
