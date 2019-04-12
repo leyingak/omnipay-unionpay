@@ -400,6 +400,46 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->setParameter('encryptCertId', $value);
     }
 
+    
+    /**
+     * @return mixed
+     */
+    public function getMiddleCert()
+    {
+        return $this->getParameter('middleCert');
+    }
+
+
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setMiddleCert($value)
+    {
+        return $this->setParameter('middleCert', $value);
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getRootCert()
+    {
+        return $this->getParameter('rootCert');
+    }
+
+
+    /**
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setRootCert($value)
+    {
+        return $this->setParameter('rootCert', $value);
+    }
+
 
     /**
      * @param $method
