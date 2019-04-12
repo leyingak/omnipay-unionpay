@@ -25,7 +25,7 @@ class ExpressGateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'version'        => '5.0.0',
+            'version'        => '5.1.0',
             'encoding'       => 'utf-8',
             'txnType'        => '01',
             'txnSubType'     => '01',
@@ -38,6 +38,7 @@ class ExpressGateway extends AbstractGateway
             'reqReserved'    => '',
             'defaultPayType' => '0001',
             'environment'    => 'sandbox',
+            'certDir'        => resource_path('certs'),
         );
     }
 

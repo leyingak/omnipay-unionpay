@@ -17,6 +17,9 @@ abstract class AbstractRequest extends BaseAbstractRequest
 
     protected $productionEndpoint = 'https://gateway.95516.com/gateway/api/';
 
+    protected $sandboxBillDownloadPoint = 'https://filedownload.test.95516.com/';
+    protected $productionBillDownloadPoint = 'https://filedownload.test.95516.com/';
+
     protected $methods = array(
         'front' => 'frontTransReq.do',
         'back'  => 'backTransReq.do',
@@ -27,6 +30,13 @@ abstract class AbstractRequest extends BaseAbstractRequest
 
     public function getEndpoint($type)
     {
+        if ('billdownload' == $type) {
+            if ($this->getEnvironment() == 'production') {
+                return $this->productionBillDownloadPoint;
+            } else {
+                return $this->sandboxBillDownloadPoint;
+            }
+        }
         if ($this->getEnvironment() == 'production') {
             return $this->productionEndpoint . $this->methods[$type];
         } else {
@@ -413,6 +423,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
         //$response = $this->httpClient->request('POST', $url, $headers, $body)->getBody();
         //$response = $this->httpClient->createRequest('POST', $url, $headers, $body)->send()->getBody();
         $response = $this->httpClient->post($url, $headers, $body)->getBody();
+        $content = $response->getContents();
         $payload  = StringUtil::parseFuckStr($response);
 
         return $payload;
@@ -431,7 +442,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
     }
 
 
-    protected function sign($params, $signType = 'RSA')
+    protected function sign($params, $signType = 'RSA2')
     {
         $signer = new Signer($params);
         $signer->setIgnores(array('sign'));

@@ -53,6 +53,10 @@ class ExpressPurchaseResponse extends AbstractResponse implements RedirectRespon
     public function getRedirectHtml()
     {
         $action = $this->getRequest()->getEndpoint('front');
+        /*unset($this->data['signature']);
+        if (empty($this->data['frontUrl'])) {
+            $this->data['frontUrl'] = $this->data['backUrl'];
+        }*/
         $fields = $this->getFormFields();
         $method = $this->getRedirectMethod();
 
@@ -111,6 +115,10 @@ eot;
     public function getTradeNo()
     {
         $data = $this->getRequest()->getHttpRequest('app', $this->data);
+
+        if ($data['respCode'] != 00) {
+            throw new \Exception($data['respMsg'], $data['respCode']);
+        }
 
         if (isset($data['tn'])) {
             return $data['tn'];

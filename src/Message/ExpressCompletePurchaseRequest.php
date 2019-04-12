@@ -70,14 +70,25 @@ class ExpressCompletePurchaseRequest extends AbstractRequest
     {
         $signer = new Signer($data);
         $signer->setIgnores(array('signature'));
-        $content   = $signer->getContentToSign();
+        $alg = isset($data['version']) && $data['version'] == '5.0.0' ? OPENSSL_ALGO_SHA1 : OPENSSL_ALGO_SHA256;
+        //$alg = OPENSSL_ALGO_SHA256;
+        $content   = $signer->getContentToSign($alg);
         $publicKey = $this->getPublicKey();
 
-        if (! $this->getPublicKey()) {
-            $publicKey = Signer::findPublicKey($data['certId'], $this->getCertDir());
-        }
+        /*if (! $this->getPublicKey()) {
+            $certId = $this->getCertId();
+            if ($certId) {
+                $publicKey = Signer::findPublicKey($certId, $this->getCertDir());
+            }
+        }*/
+        $publicKey = $data['signPubKeyCert']; //无条件相信发送方的公钥是对的！
+        /**
+         * todo 使用ca证书验证公钥的有效性
+         * 我咋感觉5.1的验签还没有5.0安全。唯一增强的是sha1变成sha256, 但公钥使用响应内容里的signPubKeyCert，
+         * 然后使用ca证书验证这个公钥的有效性，整个很繁琐。但并不如商户本地直接存储银联公钥有效。
+         */
 
-        $data['verify_success'] = $signer->verifyWithRSA($content, $data['signature'], $publicKey);
+        $data['verify_success'] = $signer->verifyWithRSA($content, $data['signature'], $publicKey, $alg);
 
         $data['is_paid'] = $data['verify_success'] && ($this->getRequestParam('respCode') == '00');
 

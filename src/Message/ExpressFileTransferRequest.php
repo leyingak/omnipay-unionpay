@@ -89,7 +89,7 @@ class ExpressFileTransferRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $data = $this->httpRequest('back', $data);
+        $data = $this->httpRequest('billdownload', $data);
 
         return $this->response = new ExpressResponse($this, $data);
     }
