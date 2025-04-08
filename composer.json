@@ -1,5 +1,5 @@
 {
-  "name": "lyenrowe/omnipay-unionpay",
+  "name": "leyingak/omnipay-unionpay",
   "type": "library",
   "description": "UnionPay gateway for Omnipay payment processing library",
   "keywords": [
