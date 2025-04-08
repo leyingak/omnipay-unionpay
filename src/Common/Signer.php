@@ -343,4 +343,43 @@ class Signer
 
         return $certs['cert'];
     }
+
+    public static function getOpenBodySig($appId, $appKey, $body)
+    {
+        $timestamp = date("YmdHis",time());
+        $nonce = md5(uniqid(microtime(true),true));
+        $str = bin2hex(hash('sha256', $body, true));
+
+        $signature = base64_encode(hash_hmac('sha256', "$appId$timestamp$nonce$str", $appKey, true));
+        return "OPEN-BODY-SIG AppId=\"$appId\", Timestamp=\"$timestamp\", Nonce=\"$nonce\", Signature=\"$signature\"";
+    }
+
+    public static function notifySign($md5Key, $params, $signType = null) {
+        $str = self::buildSignStr($params) . $md5Key;
+
+        if (strtolower($signType) == 'md5') {
+            return strtoupper(hash('md5', $str));
+        }
+
+        return strtoupper(hash('sha256', $str));
+    }
+
+    public static function buildSignStr($params) {
+        // 过滤掉 'sign' 键和 null 值
+        $filteredParams = array_filter($params, static function ($v, $k) {
+            return $k !== 'sign' && !is_null($v);
+        }, ARRAY_FILTER_USE_BOTH);
+
+        // 按键名排序
+        ksort($filteredParams);
+
+        // 生成查询字符串
+        return implode('&', array_map(
+            static function ($k, $v) {
+                return $k . '=' . (is_array($v) ? json_encode($v, JSON_UNESCAPED_UNICODE) : $v);
+            },
+            array_keys($filteredParams),
+            $filteredParams
+        ));
+    }
 }
