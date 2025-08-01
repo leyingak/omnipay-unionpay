@@ -82,7 +82,7 @@ class ApplyTokenRequest extends AbstractRequest
     }
 
 
-    protected function getEncryptCertId()
+    public function getEncryptCertId()
     {
         $cert_path = UNIONPAY_PUBLIC_KEY;
 

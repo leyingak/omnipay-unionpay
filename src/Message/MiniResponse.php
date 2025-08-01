@@ -39,7 +39,7 @@ class MiniResponse implements ResponseContract
         return $this->getResponse('errCode');
     }
 
-    public function isSuccessful(): bool
+    public function isSuccessful()
     {
         return $this->success === $this->getResponse('errCode');
     }

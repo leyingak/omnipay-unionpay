@@ -8,7 +8,7 @@ class MiniRefundResponse extends MiniResponse implements RefundResponseContract
 {
     protected $success = 'SUCCESS';
 
-    public function isRefund(): bool
+    public function isRefund()
     {
         return $this->getResponse('refundStatus') === $this->success;
     }

@@ -10,7 +10,7 @@ use Omnipay\UnionPay\Message\UacMiniOrderRequest;
 class MiniPayGateway extends AbstractMiniGateway
 {
 
-    public function getName(): string
+    public function getName()
     {
         return 'UnionPay MiniPay Gateway';
     }

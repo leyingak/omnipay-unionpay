@@ -5,9 +5,9 @@ namespace Omnipay\UnionPay\Contracts;
 interface RefundResponseContract extends ResponseContract
 {
 
-    public function isSuccessful(): bool;
+    public function isSuccessful();
 
-    public function isRefund(): bool;
+    public function isRefund();
 
 
 }

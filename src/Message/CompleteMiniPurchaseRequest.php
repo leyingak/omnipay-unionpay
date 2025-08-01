@@ -9,12 +9,12 @@ class CompleteMiniPurchaseRequest extends AbstractMiniRequest
 {
     protected $validateFields = [];
 
-    public function getUriPath(): string
+    public function getUriPath()
     {
         return '';
     }
 
-    public function validateFields(): array
+    public function validateFields()
     {
         return ['notifyKey', 'notifyParams'];
     }

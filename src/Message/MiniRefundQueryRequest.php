@@ -8,12 +8,12 @@ use Omnipay\UnionPay\Contracts\ResponseContract;
 class MiniRefundQueryRequest extends AbstractMiniRequest
 {
 
-    public function getUriPath(): string
+    public function getUriPath()
     {
         return '/v1/netpay/refund-query';
     }
 
-    public function validateFields(): array
+    public function validateFields()
     {
         return [];
     }
@@ -21,7 +21,7 @@ class MiniRefundQueryRequest extends AbstractMiniRequest
     /**
      * @return RefundResponseContract
      */
-    public function handleResponse($response): ResponseContract
+    public function handleResponse($response)
     {
         return new MiniRefundResponse($response);
     }

@@ -5,7 +5,7 @@ namespace Omnipay\UnionPay\Message;
 class WxMiniPreOrderRequest extends AbstractMiniRequest
 {
 
-    public function getUriPath(): string
+    public function getUriPath()
     {
         return '/v1/netpay/wx/mini-pre-order';
     }
@@ -25,7 +25,7 @@ class WxMiniPreOrderRequest extends AbstractMiniRequest
         return $data;
     }
 
-    public function validateFields(): array
+    public function validateFields()
     {
         return [
             'totalAmount',

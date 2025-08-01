@@ -4,7 +4,6 @@ namespace Omnipay\UnionPay\Message;
 
 use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\UnionPay\Common\ResponseVerifyHelper;
-use Omnipay\UnionPay\Common\Signer;
 
 /**
  * Class ExpressCompletePurchaseRequest

@@ -13,7 +13,7 @@ class MiniRefundRequest extends AbstractMiniRequest
         return '/v1/netpay/refund';
     }
 
-    public function validateFields(): array
+    public function validateFields()
     {
         return [
             'refundAmount'
@@ -23,7 +23,7 @@ class MiniRefundRequest extends AbstractMiniRequest
     /**
      * @return RefundResponseContract
      */
-    public function handleResponse($response): ResponseContract
+    public function handleResponse($response)
     {
         return new MiniRefundResponse($response);
     }

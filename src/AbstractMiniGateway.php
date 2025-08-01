@@ -15,7 +15,7 @@ abstract class AbstractMiniGateway extends AbstractGateway
     ];
 
 
-    public function getDefaultParameters(): array
+    public function getDefaultParameters()
     {
         return [
             'requestTimestamp' => date('Y-m-d H:i:s', time()),
@@ -31,12 +31,12 @@ abstract class AbstractMiniGateway extends AbstractGateway
     /**
      * @throws InvalidRequestException
      */
-    public function production(): self
+    public function production()
     {
         return $this->setEnvironment('production');
     }
 
-    public function setEnvironment($value): self
+    public function setEnvironment($value)
     {
         $env = strtolower($value);
 
@@ -49,17 +49,17 @@ abstract class AbstractMiniGateway extends AbstractGateway
         return $this;
     }
 
-    public function setEndpoint($value): self
+    public function setEndpoint($value)
     {
         return $this->setParameter('endpoint', $value);
     }
 
-    public function sandbox(): self
+    public function sandbox()
     {
         return $this->setEnvironment('sandbox');
     }
 
-    public function initialize(array $parameters = []): self
+    public function initialize(array $parameters = [])
     {
         $this->parameters = new ParameterBag();
 
@@ -82,7 +82,7 @@ abstract class AbstractMiniGateway extends AbstractGateway
         return $this;
     }
 
-    protected function allowFields(): array
+    protected function allowFields()
     {
         return [
             'requestTimestamp',

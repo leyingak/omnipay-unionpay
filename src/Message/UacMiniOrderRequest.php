@@ -7,7 +7,7 @@ use Omnipay\UnionPay\Contracts\ResponseContract;
 class UacMiniOrderRequest extends AbstractMiniRequest
 {
 
-    public function getUriPath(): string
+    public function getUriPath()
     {
         return '/v1/netpay/uac/mini-order';
     }
@@ -31,7 +31,7 @@ class UacMiniOrderRequest extends AbstractMiniRequest
         return $data;
     }
 
-    public function validateFields(): array
+    public function validateFields()
     {
         return [
             'totalAmount',
@@ -39,7 +39,7 @@ class UacMiniOrderRequest extends AbstractMiniRequest
         ];
     }
 
-    public function handleResponse($response): ResponseContract
+    public function handleResponse($response)
     {
         return new MiniPayResponse($response, $this);
     }

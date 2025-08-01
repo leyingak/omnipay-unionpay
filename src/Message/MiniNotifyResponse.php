@@ -8,12 +8,12 @@ class MiniNotifyResponse extends MiniResponse implements NotifyResponseContract
 {
     protected $success = 'TRADE_SUCCESS';
 
-    public function isPaid(): bool
+    public function isPaid()
     {
         return $this->getResponse('status') === $this->success;
     }
 
-    public function isSignMatch(): bool
+    public function isSignMatch()
     {
         return $this->getResponse('signature');
     }

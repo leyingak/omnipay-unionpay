@@ -5,10 +5,10 @@ namespace Omnipay\UnionPay\Contracts;
 interface NotifyResponseContract extends ResponseContract
 {
 
-    public function isSuccessful(): bool;
+    public function isSuccessful();
 
-    public function isPaid(): bool;
+    public function isPaid();
 
-    public function isSignMatch(): bool;
+    public function isSignMatch();
 
 }

@@ -30,7 +30,7 @@ class MiniGatewayTest extends GatewayTestCase
                 'tid'       => '1111',
                 'signType'  => 'SHA256',
             ])->sandbox();
-        } catch (\Throwable $e) {
+        } catch (\Exception $e) {
             print_r($e->getTraceAsString());
         }
     }

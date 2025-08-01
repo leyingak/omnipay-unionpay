@@ -38,7 +38,7 @@ if (! function_exists('env')) {
      * @param  mixed   $default
      * @return mixed
      */
-    function env(string $key, $default = null)
+    function env($key, $default = null)
     {
         $value = getenv($key);
 
@@ -73,7 +73,7 @@ if (! function_exists('env')) {
 }
 
 if (! function_exists('startsWith')) {
-    function startsWith($haystack, $needles): bool
+    function startsWith($haystack, $needles)
     {
         foreach ((array)$needles as $needle) {
             if ($needle != '' && substr($haystack, 0, strlen($needle)) === (string)$needle) {
@@ -86,7 +86,7 @@ if (! function_exists('startsWith')) {
 }
 
 if (! function_exists('endsWith')) {
-    function endsWith($haystack, $needles): bool
+    function endsWith($haystack, $needles)
     {
         foreach ((array)$needles as $needle) {
             if (substr($haystack, -strlen($needle)) === (string)$needle) {

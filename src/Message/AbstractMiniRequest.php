@@ -36,7 +36,7 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         return $this->handleResponse((string)$response->getBody());
     }
 
-    protected function getAuthorization($body = null): string
+    protected function getAuthorization($body = null)
     {
         return Signer::getOpenBodySig($this->getAppId(), $this->getAppKey(), $body);
     }
@@ -61,12 +61,12 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         return $this->setParameter('appKey', $value);
     }
 
-    protected function getRequestMethod(): string
+    protected function getRequestMethod()
     {
         return 'POST';
     }
 
-    protected function getRequestUrl(): string
+    protected function getRequestUrl()
     {
         return sprintf("%s%s", $this->getEndpoint(), $this->getUriPath());
     }
@@ -81,9 +81,9 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         return $this->setParameter('endpoint', $value);
     }
 
-    abstract public function getUriPath(): string;
+    abstract public function getUriPath();
 
-    public function handleResponse($response): ResponseContract
+    public function handleResponse($response)
     {
         return new MiniResponse($response, $this);
     }
@@ -99,7 +99,7 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         return $this->getParameters();
     }
 
-    public function initialize(array $parameters = []): self
+    public function initialize(array $parameters = [])
     {
         $this->parameters = new ParameterBag();
 
@@ -110,5 +110,5 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         return $this;
     }
 
-    abstract function validateFields(): array;
+    abstract function validateFields();
 }
