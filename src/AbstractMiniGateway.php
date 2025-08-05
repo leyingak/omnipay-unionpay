@@ -111,6 +111,7 @@ abstract class AbstractMiniGateway extends AbstractGateway
             'targetOrderId',
             'refundOrderId',
             'platformAmount',
+            'orderPrefix',
         ];
     }
 
