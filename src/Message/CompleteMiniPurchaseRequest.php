@@ -7,6 +7,11 @@ use Omnipay\UnionPay\Contracts\NotifyResponseContract;
 
 class CompleteMiniPurchaseRequest extends AbstractMiniRequest
 {
+    protected $prefixFields = [
+        'merOrderId',
+        'refundOrderId',
+    ];
+
     protected $validateFields = [];
 
     public function getUriPath()
@@ -38,6 +43,10 @@ class CompleteMiniPurchaseRequest extends AbstractMiniRequest
         $responseData['merOrderId'] = $data['merOrderId'];
         $responseData['seqId'] = $data['seqId'];
         $responseData['targetOrderId'] = $data['targetOrderId'];
+
+        if (!empty($data['refundOrderId'])) {
+            $responseData['refundOrderId'] = $data['refundOrderId'];
+        }
 
         return new MiniNotifyResponse($responseData, $this);
     }
