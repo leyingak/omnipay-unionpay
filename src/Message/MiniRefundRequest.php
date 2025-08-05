@@ -7,6 +7,10 @@ use Omnipay\UnionPay\Contracts\ResponseContract;
 
 class MiniRefundRequest extends AbstractMiniRequest
 {
+    protected $prefixFields = [
+        'merOrderId',
+        'refundOrderId',
+    ];
 
     public function getUriPath()
     {

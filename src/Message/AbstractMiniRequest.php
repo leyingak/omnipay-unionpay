@@ -21,6 +21,10 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
         'appKey',
     ];
 
+    protected $prefixFields = [
+        'merOrderId',
+    ];
+
     public function sendData($data)
     {
         $method = $this->getRequestMethod();
@@ -114,14 +118,20 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
     public function handlePrefix($data, $isAdd = true)
     {
         $prefix = $this->getParameter('orderPrefix');
-        if (empty($prefix) || empty($data['merOrderId'])) {
+        if (empty($prefix)) {
             return $data;
         }
 
-        $orderNum = $data['merOrderId'];
-        $data['merOrderId'] = $isAdd
-            ? StringUtil::start($orderNum, $prefix)
-            : StringUtil::replaceStart($prefix, '', $orderNum);
+        foreach ($this->prefixFields as $field) {
+            if (empty($data[$field])) {
+                continue;
+            }
+
+            $orderNum = $data[$field];
+            $data[$field] = $isAdd
+                ? StringUtil::start($orderNum, $prefix)
+                : StringUtil::replaceStart($prefix, '', $orderNum);
+        }
 
         return $data;
     }
