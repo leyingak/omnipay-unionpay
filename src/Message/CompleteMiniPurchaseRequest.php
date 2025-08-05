@@ -39,7 +39,7 @@ class CompleteMiniPurchaseRequest extends AbstractMiniRequest
         $responseData['seqId'] = $data['seqId'];
         $responseData['targetOrderId'] = $data['targetOrderId'];
 
-        return new MiniNotifyResponse($responseData);
+        return new MiniNotifyResponse($responseData, $this);
     }
 
     public function getData()

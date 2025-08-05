@@ -23,7 +23,7 @@ class MiniRefundQueryRequest extends AbstractMiniRequest
      */
     public function handleResponse($response)
     {
-        return new MiniRefundResponse($response);
+        return new MiniRefundResponse($response, $this);
     }
 
 }

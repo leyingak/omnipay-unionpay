@@ -10,19 +10,30 @@ class MiniResponse implements ResponseContract
 
     protected $success = 'SUCCESS';
 
+    /**
+     * @var AbstractMiniRequest $request
+     */
     protected $request;
 
     protected $response;
 
     public function __construct($response, $request = null)
     {
+        $this->request = $request;
+        $this->setResponse($response);
+    }
+
+    public function setResponse($response)
+    {
         if (is_string($response)) {
-            $this->response = json_decode($response, true);
-        } else {
-            $this->response = $response;
+            $response = json_decode($response, true);
         }
 
-        $this->request = $request;
+        if (is_array($response) && $this->request) {
+            $response = $this->request->handlePrefix($response, false);
+        }
+
+        $this->response = $response;
     }
 
     public function getResponse($key = null, $default = null)

@@ -8,7 +8,7 @@ use Omnipay\UnionPay\Contracts\ResponseContract;
 class MiniRefundRequest extends AbstractMiniRequest
 {
 
-    public function getUriPath(): string
+    public function getUriPath()
     {
         return '/v1/netpay/refund';
     }
@@ -25,7 +25,7 @@ class MiniRefundRequest extends AbstractMiniRequest
      */
     public function handleResponse($response)
     {
-        return new MiniRefundResponse($response);
+        return new MiniRefundResponse($response, $this);
     }
 
 }

@@ -23,7 +23,7 @@ class MiniQueryRequest extends AbstractMiniRequest
      */
     public function handleResponse($response)
     {
-        return new MiniNotifyResponse($response);
+        return new MiniNotifyResponse($response, $this);
     }
 
 

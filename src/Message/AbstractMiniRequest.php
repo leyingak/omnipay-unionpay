@@ -4,7 +4,7 @@ namespace Omnipay\UnionPay\Message;
 
 use Omnipay\Common\Message\AbstractRequest as OmnipayAbstractRequest;
 use Omnipay\UnionPay\Common\Signer;
-use Omnipay\UnionPay\Contracts\ResponseContract;
+use Omnipay\UnionPay\Common\StringUtil;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 abstract class AbstractMiniRequest extends OmnipayAbstractRequest
@@ -96,7 +96,8 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
             array_merge($this->validateFields, $this->validateFields())
         );
 
-        return $this->getParameters();
+        $data = $this->getParameters();
+        return $this->handlePrefix($data);
     }
 
     public function initialize(array $parameters = [])
@@ -109,6 +110,22 @@ abstract class AbstractMiniRequest extends OmnipayAbstractRequest
 
         return $this;
     }
+
+    public function handlePrefix($data, $isAdd = true)
+    {
+        $prefix = $this->getParameter('orderPrefix');
+        if (empty($prefix) || empty($data['merOrderId'])) {
+            return $data;
+        }
+
+        $orderNum = $data['merOrderId'];
+        $data['merOrderId'] = $isAdd
+            ? StringUtil::start($orderNum, $prefix)
+            : StringUtil::replaceStart($prefix, '', $orderNum);
+
+        return $data;
+    }
+
 
     abstract function validateFields();
 }
